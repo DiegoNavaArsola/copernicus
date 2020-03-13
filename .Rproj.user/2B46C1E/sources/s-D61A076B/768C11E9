@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1582910224483.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "768C11E9",
+    "lastKnownWriteTime" : 1584119158,
+    "last_content_update" : 1584119159127,
+    "path" : "C:/Users/Diego/Desktop/DatosCop/cop_datos_9v/cop_datos_9v/epsilon_cop_9v.R",
+    "project_path" : "epsilon_cop_9v.R",
+    "properties" : {
+        "cursorPosition" : "64,15",
+        "scrollLine" : "55",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

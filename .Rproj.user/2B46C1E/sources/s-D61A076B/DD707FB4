@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1583515508249.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "DD707FB4",
+    "lastKnownWriteTime" : 2044993599072,
+    "last_content_update" : 1583515508249,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "FD7E72D4",
+        "caption" : "epsilon",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=epsilon&cache_key=FD7E72D4",
+        "displayedObservations" : 134,
+        "environment" : "",
+        "expression" : "epsilon",
+        "object" : "epsilon",
+        "preview" : 0,
+        "totalObservations" : 134,
+        "variables" : 30
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
