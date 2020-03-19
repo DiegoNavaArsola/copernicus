@@ -16,33 +16,29 @@ nomvar <- names(df)
 #Funcion para contar variables con celdas con multiples datos (sep es un string)
 cont_mul_var <- function(column,sep) {
   column.string <- paste(column,collapse = sep)
-  column.vector <- strsplit(column.string,sep)
+  column.vector <- strsplit(column.string, sep)
   return(column.vector)
-}
-
-create_temp_df <- function(matrix) {
-  
 }
 
 #1:128 + 213 + 215 + 431 + 596 --> Clases:132
 
-x <- c(0:128)
-y <- c(213,215,431,596)
-
-nclas <- c(x,y)
-
-lnc <- length(nclas)
+# x <- c(0:128)
+# y <- c(213,215,431,596)
+# 
+# nclas <- c(x,y)
+# 
+# lnc <- length(nclas)
 
 #Inicialización de matrices
-Nx = matrix(0, nrow = lnc+1, ncol = dim(df)[2])
-Ncx = matrix(0, nrow = lnc+1, ncol = dim(df)[2])
-epsilon = matrix(0, nrow = lnc+1, ncol = dim(df)[2])
-arg_ln = matrix(0, nrow = lnc+1, ncol = dim(df)[2])
-score = matrix(0, nrow = lnc+1, ncol = dim(df)[2])
+Nx = matrix(NA, nrow = dim(df)[1]+1, ncol = dim(df)[2])
+Ncx = matrix(NA, nrow = dim(df)[1]+1, ncol = dim(df)[2])
+epsilon = matrix(NA, nrow = dim(df)[1]+1, ncol = dim(df)[2])
+arg_ln = matrix(NA, nrow = dim(df)[1]+1, ncol = dim(df)[2])
+score = matrix(NA, nrow = dim(df)[1]+1, ncol = dim(df)[2])
 
-temp <- matrix(0,nrow = lnc+1,ncol = 1)
+temp <- matrix(NA,nrow = dim(df)[1]+1,ncol = 1)
 
-for (k in 1:lnc) {
+for (k in 1:dim(df)[1]) {
   if (is.na(df$Correo[k]) == TRUE) {
     df$Correo[k] <- 0
   }
@@ -58,27 +54,34 @@ for (k in 1:lnc) {
 }
 
 for (i in 1:dim(df)[2]) {
-  for (j in 0:lnc) {
+  for (j in 0:(dim(df)[1]-1)) {
     
     if (is.character(df[[i]]) == TRUE) {
       aux <- cont_mul_var(df[[i]],",")
       taux <- table(aux)
-      Nx[j+1,i] <- taux[[j+1]]
-      if (df[[j,3]]==7 | df[[j,3]]==9) {
-        temp[j+1,1] <- df[[j,i]]
+      for (t_length in 1:(dim(taux)-2)) {
+        Nx[t_length+1,i] <- taux[[t_length+1]]
+      }
+      
+      if (df[[j+1,3]]==7 | df[[j+1,3]]==9) {
+        prueba[j+1,1] <- df[[j+1,i]]
+        taux2 <- table(cont_mul_var(prueba,","))
+        for (t2_length in 1:(dim(taux2)-2)) {
+          Ncx[t2_length+1,i] <- taux2[[t2_length+1]]
+        }
       }
     }
-    
     else{
       Nx[j,i] <- sum(df[[i]] == j-1,na.rm = T)
-      #Ncx[j,i] <- sum(df[[i]] == j-1 & (df[[3]] == 7 | df[[3]] == 9),na.rm = T)
+      Ncx[j,i] <- sum(df[[i]] == j-1 & (df[[3]] == 7 | df[[3]] == 9),na.rm = T)
     }
-    Ncx[j,i] <- sum(df[[i]] == j-1 & (df[[3]] == 7 | df[[3]] == 9),na.rm = T)
+    Nx[is.nan(Nx)] <- 0
+    Ncx[is.nan(Ncx)] <- 0
+    
     epsilon[j,i] <- (Nx[j,i]*((Ncx[j,i]/Nx[j,i])-(Nc/n)))/(Nx[j,i]*(Nc/n)*sqrt((1-(Nc/n))))
     
     arg_ln[j,i] <- (Ncx[j,i]/Nc)/((Nx[j,i]-Ncx[j,i])/(n-Nc))
     score[j,i] <- log(arg_ln[j,i],exp(1))
-    
   }
 }   
     
