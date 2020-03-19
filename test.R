@@ -24,7 +24,6 @@ prueba <- matrix(0,nrow = dim(df)[1]+2,ncol = 1)
 
 for (i in 1:dim(df1)[2]) {
   for (j in 0:236) {
-#    if (i == 10) {    
     if (is.character(df1[[i]]) == TRUE) {
       aux1 <- cont_mul_var(df1[[i]],",")
       taux1 <- table(aux1)
